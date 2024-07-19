@@ -1,9 +1,7 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { ReactNode } from 'react';
-
-const inter = Inter({ subsets: ["latin"] });
+import Header from 'components/Header';
+import { satoshi } from 'config/fonts';
+import './globals.css';
 
 export default function RootLayout({
   children,
@@ -12,7 +10,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={satoshi.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
