@@ -24,9 +24,6 @@
     "incremental": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "paths": {
-      "@app/*": ["app/[locale]/*"]
-    },
     "plugins": [
       {
         "name": "next"
