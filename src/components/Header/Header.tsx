@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import { Input } from '@/components/ui/input';
 import { getMenuBySlugApi } from 'api/controllers/menuController';
 import Logo from 'components/Logo';
 import { MENU_IDS } from 'constants/menuIds';
 import HeaderActions from './HeaderActions';
 import HeaderNav from './HeaderNav';
-import HeaderSearch from './HeaderSearch';
 import HeaderTopBar from './HeaderTopBar';
 import MobileMenu from './MobileMenu';
 
@@ -16,13 +16,17 @@ const Header: FC = async () => {
     <header>
       <HeaderTopBar />
       <div className="container">
-        <div className="py-6 flex items-center justify-between gap-10">
-          <div className="flex gap-4 items-center">
+        <div className="py-6 flex items-center justify-between gap-4 sm:gap-10 h-[88px]">
+          <div className="flex gap-4 lg:gap-0 items-center">
             <MobileMenu menuItems={headerMenu} />
             <Logo />
           </div>
           <HeaderNav menuItems={headerMenu} />
-          <HeaderSearch className="hidden lg:block" />
+          <Input
+            type="search"
+            placeholder="Search for products..."
+            className="hidden lg:block"
+          />
           <HeaderActions />
         </div>
       </div>

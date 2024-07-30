@@ -1,28 +1,60 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import { useDialog } from 'hooks/useDialog';
-import HeaderSearch from './HeaderSearch';
 
 const HeaderActions: FC = () => {
-  const { handleOpenDialog, isDialogOpen } = useDialog();
+  const { handleOpenDialog, isDialogOpen, handleCloseDialog } = useDialog();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(event.target as Node)
+    ) {
+      handleCloseDialog();
+    }
+  };
+
+  const handleSearchClick = () => {
+    handleOpenDialog();
+    inputRef.current?.focus();
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  });
 
   return (
-    <div className="flex items-center gap-4 w-fit">
-      {isDialogOpen ? (
-        <HeaderSearch />
-      ) : (
+    <div className="flex items-center gap-2 sm:gap-4 w-fit">
+      <div ref={containerRef}>
+        <Input
+          type="search"
+          placeholder="Search for products..."
+          className={cn('lg:hidden transition', {
+            'opacity-0 invisible w-0 h-0 p-0': !isDialogOpen,
+          })}
+          ref={inputRef}
+        />
         <Image
-          className="block lg:hidden cursor-pointer"
+          className={cn('block lg:hidden cursor-pointer transition', {
+            'invisible opacity-0 h-0': isDialogOpen,
+          })}
           src="/assets/icons/search.svg"
           alt="search"
           width={24}
           height={24}
-          onClick={handleOpenDialog}
+          onClick={handleSearchClick}
         />
-      )}
-
+      </div>
       <Image
         className="cursor-pointer"
         src="/assets/icons/cart.svg"
