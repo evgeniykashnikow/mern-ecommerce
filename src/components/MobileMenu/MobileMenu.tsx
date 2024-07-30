@@ -12,12 +12,12 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import BurgerButton from 'components/BurgerButton';
-import { NAV_ITEMS } from 'components/HeaderNav/utils';
 import Logo from 'components/Logo';
 import NavLink from 'components/NavLink';
 import { useDialog } from 'hooks/useDialog';
+import { Props } from './types';
 
-const MobileMenu: FC = () => {
+const MobileMenu: FC<Props> = ({ menuItems }) => {
   const { handleOpenDialog, isDialogOpen, handleCloseDialog } = useDialog();
 
   return (
@@ -26,8 +26,8 @@ const MobileMenu: FC = () => {
         <DrawerTrigger>
           <BurgerButton isOpen={isDialogOpen} onClick={handleOpenDialog} />
         </DrawerTrigger>
-        <DrawerContent className="bottom-[unset] right-[unset] top-0 left-0 h-full mt-0 bg-white rounded-[unset] w-1/3">
-          <DrawerHeader className="flex flex-col gap-4">
+        <DrawerContent className="bottom-[unset] right-[unset] top-0 left-0 h-full mt-0 bg-white rounded-[unset] w-full sm:w-1/3">
+          <DrawerHeader className="flex flex-col gap-4 text-left">
             <DrawerClose>
               <BurgerButton isOpen={isDialogOpen} onClick={handleOpenDialog} />
             </DrawerClose>
@@ -35,12 +35,12 @@ const MobileMenu: FC = () => {
               <Logo />
             </DialogTitle>
             <DrawerDescription className="flex flex-col gap-4 mt-8">
-              {NAV_ITEMS.map((item) => (
+              {menuItems.map((item) => (
                 <NavLink
-                  key={item.href}
-                  label={item.label}
-                  href={item.href}
-                  withSubmenu={item.withSubmenu}
+                  key={item.node.path}
+                  label={item.node.label}
+                  href={item.node.path}
+                  withSubmenu={!!item.node.childItems?.nodes.length}
                 />
               ))}
             </DrawerDescription>
