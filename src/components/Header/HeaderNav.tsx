@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import NavLink from 'components/NavLink';
-import { NAV_ITEMS } from './utils';
+import { MenuItemsProps } from './types';
 
-const HeaderNav: FC = () => (
+const HeaderNav: FC<MenuItemsProps> = ({ menuItems }) => (
   <nav className="hidden lg:block">
     <ul className="flex items-center gap-6">
-      {NAV_ITEMS.map((item) => (
-        <li key={item.href}>
+      {menuItems?.map((item) => (
+        <li key={item.path}>
           <NavLink
             label={item.label}
-            href={item.href}
-            withSubmenu={item.withSubmenu}
+            href={item.path}
+            withSubmenu={!!item.childItems?.nodes.length}
           />
         </li>
       ))}

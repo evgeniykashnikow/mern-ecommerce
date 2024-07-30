@@ -2,8 +2,8 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
-import HeaderSearch from 'components/HeaderSearch';
 import { useDialog } from 'hooks/useDialog';
+import HeaderSearch from './HeaderSearch';
 
 const HeaderActions: FC = () => {
   const { handleOpenDialog, isDialogOpen } = useDialog();

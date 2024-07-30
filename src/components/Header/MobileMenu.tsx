@@ -15,9 +15,9 @@ import BurgerButton from 'components/BurgerButton';
 import Logo from 'components/Logo';
 import NavLink from 'components/NavLink';
 import { useDialog } from 'hooks/useDialog';
-import { Props } from './types';
+import { MenuItemsProps } from './types';
 
-const MobileMenu: FC<Props> = ({ menuItems }) => {
+const MobileMenu: FC<MenuItemsProps> = ({ menuItems }) => {
   const { handleOpenDialog, isDialogOpen, handleCloseDialog } = useDialog();
 
   return (
@@ -35,12 +35,12 @@ const MobileMenu: FC<Props> = ({ menuItems }) => {
               <Logo />
             </DialogTitle>
             <DrawerDescription className="flex flex-col gap-4 mt-8">
-              {menuItems.map((item) => (
+              {menuItems?.map((item) => (
                 <NavLink
-                  key={item.node.path}
-                  label={item.node.label}
-                  href={item.node.path}
-                  withSubmenu={!!item.node.childItems?.nodes.length}
+                  key={item.path}
+                  label={item.label}
+                  href={item.path}
+                  withSubmenu={!!item.childItems?.nodes.length}
                 />
               ))}
             </DrawerDescription>

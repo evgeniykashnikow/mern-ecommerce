@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { Props } from './types';
+import { HeaderSearchProps } from './types';
 
-const HeaderSearch: FC<Props> = ({ className }) => (
+const HeaderSearch: FC<HeaderSearchProps> = ({ className }) => (
   <Input
     type="search"
     placeholder="Search for products..."

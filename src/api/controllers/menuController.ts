@@ -5,16 +5,13 @@ export const getMenuBySlugApi = (location: string) => {
   const query = `
     query GetMenuByLocation($location: MenuLocationEnum!) {
       menuItems(where: { location: $location }) {
-        edges {
-          node {
-            label
-            path
-            childItems {
-              nodes {
-                path
-                parentId
-                label
-              }
+        nodes {
+          label
+          path
+          childItems {
+            nodes {
+              path
+              label
             }
           }
         }
