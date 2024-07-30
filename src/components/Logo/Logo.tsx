@@ -4,7 +4,7 @@ import { ROUTES } from 'config/routes';
 
 const Logo: FC = () => (
   <Link href={ROUTES.HOME}>
-    <p className="text-3xl font-bold text-black">SHOP.CO</p>
+    <p className="text-2xl sm:text-3xl font-bold text-black">SHOP.CO</p>
   </Link>
 );
 
