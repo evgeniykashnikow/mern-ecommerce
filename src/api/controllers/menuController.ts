@@ -8,6 +8,7 @@ export const getMenuBySlugApi = (location: string) => {
         nodes {
           label
           path
+          parentDatabaseId
           childItems {
             nodes {
               path

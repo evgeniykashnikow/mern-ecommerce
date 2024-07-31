@@ -1,6 +1,7 @@
 export type MenuItem = {
   label: string;
   path: string;
+  parentDatabaseId: number;
   childItems?: {
     nodes: {
       label: string;
