@@ -37,7 +37,7 @@ const HeaderActions: FC = () => {
     <div className="flex items-center gap-2 sm:gap-4 w-fit">
       <div ref={containerRef}>
         <Input
-          type="search"
+          type="text"
           placeholder="Search for products..."
           className={cn('lg:hidden transition', {
             'opacity-0 invisible w-0 h-0 p-0': !isDialogOpen,

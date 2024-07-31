@@ -2,6 +2,13 @@
 
 import { FC } from 'react';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import Link from 'next/link';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import {
   Drawer,
   DrawerClose,
@@ -22,7 +29,7 @@ const MobileMenu: FC<MenuItemsProps> = ({ menuItems }) => {
 
   return (
     <>
-      <Drawer direction="left" onClose={handleCloseDialog}>
+      <Drawer open={isDialogOpen} direction="left" onClose={handleCloseDialog}>
         <DrawerTrigger>
           <BurgerButton isOpen={isDialogOpen} onClick={handleOpenDialog} />
         </DrawerTrigger>
@@ -32,17 +39,41 @@ const MobileMenu: FC<MenuItemsProps> = ({ menuItems }) => {
               <BurgerButton isOpen={isDialogOpen} onClick={handleOpenDialog} />
             </DrawerClose>
             <DialogTitle>
-              <Logo />
+              <Logo onClick={handleCloseDialog} />
             </DialogTitle>
             <DrawerDescription className="flex flex-col gap-4 mt-8">
-              {menuItems?.map((item) => (
-                <NavLink
-                  key={item.path}
-                  label={item.label}
-                  href={item.path}
-                  withSubmenu={!!item.childItems?.nodes.length}
-                />
-              ))}
+              <Accordion type="single" collapsible className="w-full">
+                {menuItems?.map((menuItem) =>
+                  menuItem.childItems?.nodes.length ? (
+                    <AccordionItem value={menuItem.path} key={menuItem.path}>
+                      <AccordionTrigger>
+                        <Link onClick={handleCloseDialog} href={menuItem.path}>
+                          {menuItem.label}
+                        </Link>
+                      </AccordionTrigger>
+                      <AccordionContent className="flex flex-col gap-4">
+                        {menuItem.childItems.nodes.map((childMenuItem) => (
+                          <NavLink
+                            label={childMenuItem.label}
+                            href={childMenuItem.path}
+                            key={childMenuItem.path}
+                          />
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ) : (
+                    !menuItem.parentDatabaseId && (
+                      <AccordionItem value={menuItem.path} key={menuItem.path}>
+                        <Link onClick={handleCloseDialog} href={menuItem.path}>
+                          <AccordionTrigger hideArrow>
+                            {menuItem.label}
+                          </AccordionTrigger>
+                        </Link>
+                      </AccordionItem>
+                    )
+                  ),
+                )}
+              </Accordion>
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter />

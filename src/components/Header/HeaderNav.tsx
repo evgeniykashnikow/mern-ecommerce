@@ -24,7 +24,10 @@ const HeaderNav: FC<MenuItemsProps> = ({ menuItems }) => (
             <NavigationMenuContent>
               <ul>
                 {menuItem.childItems?.nodes.map((childMenuItem) => (
-                  <li key={childMenuItem.path}>
+                  <li
+                    key={childMenuItem.path}
+                    className="hover:bg-gray-50 transition"
+                  >
                     <Link href={childMenuItem.path} legacyBehavior passHref>
                       <NavigationMenuLink
                         className={navigationMenuTriggerStyle()}

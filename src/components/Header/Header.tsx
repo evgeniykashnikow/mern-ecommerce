@@ -23,7 +23,7 @@ const Header: FC = async () => {
           </div>
           <HeaderNav menuItems={headerMenu} />
           <Input
-            type="search"
+            type="text"
             placeholder="Search for products..."
             className="hidden lg:block"
           />
