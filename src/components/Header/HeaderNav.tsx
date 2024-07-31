@@ -20,10 +20,11 @@ const HeaderNav: FC<MenuItemsProps> = ({ menuItems }) => (
             <Link href={menuItem.path}>
               <NavigationMenuTrigger>{menuItem.label}</NavigationMenuTrigger>
             </Link>
-            {menuItem.childItems?.nodes.map((childMenuItem) => (
-              <NavigationMenuContent key={childMenuItem.path}>
-                <ul>
-                  <li>
+
+            <NavigationMenuContent>
+              <ul>
+                {menuItem.childItems?.nodes.map((childMenuItem) => (
+                  <li key={childMenuItem.path}>
                     <Link href={childMenuItem.path} legacyBehavior passHref>
                       <NavigationMenuLink
                         className={navigationMenuTriggerStyle()}
@@ -32,9 +33,9 @@ const HeaderNav: FC<MenuItemsProps> = ({ menuItems }) => (
                       </NavigationMenuLink>
                     </Link>
                   </li>
-                </ul>
-              </NavigationMenuContent>
-            ))}
+                ))}
+              </ul>
+            </NavigationMenuContent>
           </NavigationMenuItem>
         ) : (
           !menuItem.parentDatabaseId && (
