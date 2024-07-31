@@ -25,7 +25,12 @@ const Header: FC = async () => {
           <Input
             type="text"
             placeholder="Search for products..."
-            className="hidden lg:block"
+            className="hidden lg:block pl-12"
+            style={{
+              backgroundImage: "url('/assets/icons/search-gray.svg')",
+              backgroundPosition: 'left 1rem center',
+              backgroundRepeat: 'no-repeat',
+            }}
           />
           <HeaderActions />
         </div>

@@ -39,10 +39,15 @@ const HeaderActions: FC = () => {
         <Input
           type="text"
           placeholder="Search for products..."
-          className={cn('lg:hidden transition', {
+          className={cn('lg:hidden transition pl-12', {
             'opacity-0 invisible w-0 h-0 p-0': !isDialogOpen,
           })}
           ref={inputRef}
+          style={{
+            backgroundImage: "url('/assets/icons/search-gray.svg')",
+            backgroundPosition: 'left 1rem center',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
         <Image
           className={cn('block lg:hidden cursor-pointer transition', {
